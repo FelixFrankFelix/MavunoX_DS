@@ -17,3 +17,4 @@ def rec_gen(factor, min,max,value,unit, crop):
     )
     return completion.choices[0].message.content
 
+print(api_key)
