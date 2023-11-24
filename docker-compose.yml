@@ -7,6 +7,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:80"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=80
     depends_on:
       - redis
     networks:
@@ -20,3 +23,5 @@ services:
 networks:
   fastapi-network:
     driver: bridge
+env_file:
+    - .env

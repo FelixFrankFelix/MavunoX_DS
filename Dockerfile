@@ -7,11 +7,17 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
+COPY .env /app/.env
+
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
+
+# Set environment variables
+ENV HOST=0.0.0.0
+ENV PORT=80
 
 # Command to run on container start
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]
