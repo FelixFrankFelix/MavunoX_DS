@@ -19,6 +19,11 @@ class FarmData(BaseModel):
     value: float
     label: str
 
+@app.get("/")
+def main():
+   
+    return "EVIAN IS ACTIVE"
+
 @app.post("/api/recommedations/temperature")
 def rec_gen(data: FarmData):
     recommedation= rec.rec_gen('temperature',data.min,data.max,data.value,'°C',data.label)
