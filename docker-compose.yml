@@ -23,5 +23,3 @@ services:
 networks:
   fastapi-network:
     driver: bridge
-env_file:
-    - .env
