@@ -22,7 +22,7 @@ class FarmData(BaseModel):
 @app.get("/")
 def main():
    
-    return "EVIAN IS ACTIVE"
+    return "ACTIVE"
 
 @app.post("/api/recommedations/temperature")
 def rec_gen(data: FarmData):
