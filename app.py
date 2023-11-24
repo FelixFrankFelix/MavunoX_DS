@@ -13,11 +13,7 @@ class CropData(BaseModel):
     label: str
     country: str
 
-class FarmData(BaseModel):
-    min : float
-    max : float
-    value: float
-    label: str
+
 
 @app.get("/")
 def main():
