@@ -4,14 +4,16 @@ from pydantic import BaseModel
 import recommendation_engine as rec
 app = FastAPI()
 
-class CropData(BaseModel):
+class FirstData(BaseModel):
     R: int
     G: int
     B:int
-    temperature: float
-    humidity: float
     label: str
     country: str
+
+class SecondData(BaseModel):
+    temperature: float
+    humidity: float
 
 class FarmData(BaseModel):
     min : float
@@ -45,10 +47,18 @@ def rec_gen(data: FarmData):
     return recommedation
 
 
-@app.post("/api/get_results/")
-def process_crop_data(data: CropData):
+@app.post("/api/get_first_results/")
+def process_crop_data(data: FirstData):
     
-    results = gn.get_Results(data)
+    results = gn.get_First_Results(data)
+    # Perform processing or any logic with the data
+    # For demonstration, just return the received data
+    return results
+
+@app.post("/api/get_second_results/")
+def process_crop_data(data: SecondData):
+    
+    results = gn.get_Second_Results(data)
     # Perform processing or any logic with the data
     # For demonstration, just return the received data
     return results
