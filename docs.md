@@ -116,3 +116,102 @@ The API returns a JSON object containing the following recommendations:
 
 ---
 
+
+
+```markdown
+## API Endpoint: `/api/recommendations/temperature`
+
+### Description
+
+This endpoint provides recommendations based on the input temperature range for a specific crop.
+
+### Method
+
+`POST`
+
+### Input
+
+- **min (float):** Minimum temperature threshold.
+- **max (float):** Maximum temperature threshold.
+- **value (float):** Current temperature value.
+- **label (str):** Crop label for which recommendations are requested.
+
+#### Example Input
+
+```json
+{
+  "min": 10.0,
+  "max": 30.0,
+  "value": 20.0,
+  "label": "rice"
+}
+```
+
+### Output
+
+The response will be a string containing recommendations based on the provided temperature information.
+
+#### Example Output
+
+```json
+"The current temperature of 20.0 °C falls within the recommended range of 10.0-30.0 °C for optimal rice yield. To further enhance the yield, farmers can consider practices such as proper irrigation management, nutrient supplementation, and timely pest control. It is crucial to monitor and maintain the temperature within the recommended range to support maximum rice production."
+```
+
+### Usage
+
+Send a POST request to the `/api/recommendations/temperature` endpoint with the required input parameters to receive recommendations for the specified crop based on the provided temperature range.
+
+### Important Note
+
+Farmers are encouraged to follow the provided recommendations to optimize crop yield. The information is advisory and aims to assist farmers in making informed decisions about crop management practices.
+```
+
+
+
+```markdown
+## API Endpoint: `/api/recommendations/humidity`
+
+### Description
+
+This endpoint provides recommendations based on the input humidity range for a specific crop.
+
+### Method
+
+`POST`
+
+### Input
+
+- **min (float):** Minimum humidity threshold.
+- **max (float):** Maximum humidity threshold.
+- **value (float):** Current humidity value.
+- **label (str):** Crop label for which recommendations are requested.
+
+#### Example Input
+
+```json
+{
+  "min": 20.0,
+  "max": 30.0,
+  "value": 40.0,
+  "label": "rice"
+}
+```
+
+### Output
+
+The response will be a string containing recommendations based on the provided humidity information.
+
+#### Example Output
+
+```json
+"The current humidity of 40.0% is higher than the recommended range for optimal rice yield (20.0-30.0%). High humidity may lead to disease outbreaks and decrease crop productivity. To improve yield, farmers should consider using proper drainage systems, ensuring good air circulation, implementing effective irrigation techniques, and adjusting planting dates to avoid peak humidity periods."
+```
+
+### Usage
+
+Send a POST request to the `/api/recommendations/humidity` endpoint with the required input parameters to receive recommendations for the specified crop based on the provided humidity range.
+
+### Important Note
+
+Farmers are encouraged to follow the provided recommendations to optimize crop yield. The information is advisory and aims to assist farmers in making informed decisions about crop management practices.
+```
