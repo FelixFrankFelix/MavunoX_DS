@@ -33,21 +33,7 @@ crop_info_path = 'ML_Models/crop_info.pkl'
 with open(crop_info_path, 'rb') as crop_info_file:
     crop_info = pickle.load(crop_info_file)
 
-planting_season = {
-    'blackgram': 'winter',
-    'chickpea': 'winter',
-    'cotton': 'winter',
-    'jute': 'rainy',
-    'kidneybeans': 'spring',
-    'lentil': 'rainy',
-    'maize': 'winter',
-    'mothbeans': 'summer',
-    'mungbean': 'rainy',
-    'muskmelon': 'summer',
-    'pigeonpeas': 'rainy',
-    'rice': 'rainy',
-    'watermelon': 'summer'
-}
+
 duration_factor = {
     'blackgram': 1,
     'chickpea': 1,
@@ -139,7 +125,7 @@ def get_HarvestSeason(temperature,humidity,soil_pH,water_availability,label,coun
     # Ensure the columns match the ones used during training
     new_data_encoded = new_data_encoded.reindex(columns=one_hot_encoder_info['columns'], fill_value=0)
 
-    new_data_encoded = new_data_encoded.drop('harvest season',axis = 1)
+    new_data_encoded = new_data_encoded.drop('season',axis = 1)
     # Make predictions with the XGBoost model
     predictions = model.predict(new_data_encoded)
     # Inverse transform the predicted labels to get harvest season in words
@@ -198,7 +184,6 @@ def get_Results(entry):
         'humidity': float(entry.humidity),
         'ph': float(soil_pH),
         'water_availability': float(water_avail),
-        'planting_season': planting_season[entry.label],
         'label': entry.label,
         'Country': entry.country,
         'harvest_season': harvest_season,
