@@ -1,7 +1,4 @@
-Sure, here is an example of API documentation for the provided endpoint:
-
----
-
+----
 # MavunoX Farming Recommendations API
 
 ## Overview
@@ -118,26 +115,29 @@ The API returns a JSON object containing the following recommendations:
 
 
 
-```markdown
-## API Endpoint: `/api/recommendations/temperature`
+
+## API Endpoint: `/api/recommedations/temperature` (POST)
 
 ### Description
+This endpoint provides recommendations based on temperature values for optimizing rice yield. It evaluates whether the input temperature falls within the recommended range and suggests additional practices for enhancing rice production.
 
-This endpoint provides recommendations based on the input temperature range for a specific crop.
+### Endpoint URL
+```plaintext
+https://mavunox.onrender.com/api/recommedations/temperature
+```
 
 ### Method
-
 `POST`
 
 ### Input
+The input should be a JSON object with the following parameters:
 
-- **min (float):** Minimum temperature threshold.
-- **max (float):** Maximum temperature threshold.
-- **value (float):** Current temperature value.
-- **label (str):** Crop label for which recommendations are requested.
+- `min` (float): Minimum recommended temperature.
+- `max` (float): Maximum recommended temperature.
+- `value` (float): Current temperature value.
+- `label` (string): The label or type of crop (e.g., "rice").
 
-#### Example Input
-
+Example:
 ```json
 {
   "min": 10.0,
@@ -146,22 +146,173 @@ This endpoint provides recommendations based on the input temperature range for 
   "label": "rice"
 }
 ```
-## Response
-The API returns a string message providing temperature recommendations for the specified crop.
 
-#### Example Output
+### Output
+The output is a string providing information about the current temperature's alignment with the recommended range and suggestions for optimizing rice yield.
 
-```
+Example:
+```plaintext
 "The current temperature of 20.0 °C falls within the recommended range of 10.0-30.0 °C for optimal rice yield. To further enhance the yield, farmers can consider practices such as proper irrigation management, nutrient supplementation, and timely pest control. It is crucial to monitor and maintain the temperature within the recommended range to support maximum rice production."
 ```
 
-### Usage
+### Response Codes
+- `200 OK`: Successful request and recommendation provided.
+- `400 Bad Request`: Invalid input parameters.
+- `500 Internal Server Error`: Server error.
 
-Send a POST request to the `/api/recommendations/temperature` endpoint with the required input parameters to receive recommendations for the specified crop based on the provided temperature range.
+### Notes
+- Ensure that the input values are valid float numbers.
+- Check the response code and handle errors accordingly.
 
-### Important Note
 
-Farmers are encouraged to follow the provided recommendations to optimize crop yield. The information is advisory and aims to assist farmers in making informed decisions about crop management practices.
+
+
+## API Endpoint: `/api/recommedations/humidity` (POST)
+
+### Description
+This endpoint provides recommendations based on humidity values for optimizing rice yield. It evaluates whether the input humidity level falls within the recommended range and suggests additional practices for enhancing rice production.
+
+### Endpoint URL
+```plaintext
+https://mavunox.onrender.com/api/recommedations/humidity
 ```
 
+### Method
+`POST`
 
+### Input
+The input should be a JSON object with the following parameters:
+
+- `min` (float): Minimum recommended humidity level.
+- `max` (float): Maximum recommended humidity level.
+- `value` (float): Current humidity level.
+- `label` (string): The label or type of crop (e.g., "rice").
+
+Example:
+```json
+{
+  "min": 20.0,
+  "max": 30.0,
+  "value": 40.0,
+  "label": "rice"
+}
+```
+
+### Output
+The output is a string providing information about the current humidity level's alignment with the recommended range and suggestions for optimizing rice yield.
+
+Example:
+```plaintext
+"The current humidity of 40.0% is higher than the recommended range for optimal rice yield (20.0-30.0%). High humidity may lead to disease outbreaks and decrease crop productivity. To improve yield, farmers should consider using proper drainage systems, ensuring good air circulation, implementing effective irrigation techniques, and adjusting planting dates to avoid peak humidity periods."
+```
+
+### Response Codes
+- `200 OK`: Successful request and recommendation provided.
+- `400 Bad Request`: Invalid input parameters.
+- `500 Internal Server Error`: Server error.
+
+### Notes
+- Ensure that the input values are valid float numbers.
+- Check the response code and handle errors accordingly.
+
+
+
+## API Endpoint: `/api/recommedations/ph` (POST)
+
+### Description
+This endpoint provides recommendations based on pH values for optimizing rice yield. It evaluates whether the input pH level falls within the recommended range and suggests additional practices for enhancing rice production.
+
+### Endpoint URL
+```plaintext
+https://mavunox.onrender.com/api/recommedations/ph
+```
+
+### Method
+`POST`
+
+### Input
+The input should be a JSON object with the following parameters:
+
+- `min` (float): Minimum recommended pH level.
+- `max` (float): Maximum recommended pH level.
+- `value` (float): Current pH level.
+- `label` (string): The label or type of crop (e.g., "rice").
+
+Example:
+```json
+{
+  "min": 7.0,
+  "max": 8.0,
+  "value": 4.0,
+  "label": "rice"
+}
+```
+
+### Output
+The output is a string providing information about the current pH level's suitability for optimal rice yield and suggestions for adjustment.
+
+Example:
+```plaintext
+"The current pH level of 4.0 is not suitable for optimal rice yield. To improve yield, raise the pH to 7.0-8.0. Lime application is recommended for acid soils. Apply approximately 6.67 kg of agricultural lime per 10 m². It's important to test soil pH regularly and adjust lime application accordingly to maintain optimal pH levels for maximum rice production."
+```
+
+### Response Codes
+- `200 OK`: Successful request and recommendation provided.
+- `400 Bad Request`: Invalid input parameters.
+- `500 Internal Server Error`: Server error.
+
+### Notes
+- Ensure that the input values are valid float numbers.
+- Check the response code and handle errors accordingly.
+
+
+
+## API Endpoint: `/api/recommedations/water_availability` (POST)
+
+### Description
+This endpoint provides recommendations based on water availability values for optimizing rice yield. It evaluates whether the input water availability falls within the recommended range and suggests additional practices for enhancing rice production.
+
+### Endpoint URL
+```plaintext
+https://mavunox.onrender.com/api/recommedations/water_availability
+```
+
+### Method
+`POST`
+
+### Input
+The input should be a JSON object with the following parameters:
+
+- `min` (float): Minimum recommended water availability.
+- `max` (float): Maximum recommended water availability.
+- `value` (float): Current water availability.
+- `label` (string): The label or type of crop (e.g., "rice").
+
+Example:
+```json
+{
+  "min": 150.0,
+  "max": 170.0,
+  "value": 160.0,
+  "label": "rice"
+}
+```
+
+### Output
+The output is a string providing information about the current water availability and its alignment with the recommended range, along with suggestions for optimizing rice yield.
+
+Example:
+```plaintext
+"Based on the current water availability of 160.0 mm, it falls within the recommended range of 150.0-170.0 mm for optimal yield. To further improve rice yield, consider proper irrigation management with a focus on avoiding water stress during critical growth stages. Additionally, implementing water-saving techniques such as drip irrigation and mulching can help conserve water and enhance overall crop productivity."
+```
+
+### Response Codes
+- `200 OK`: Successful request and recommendation provided.
+- `400 Bad Request`: Invalid input parameters.
+- `500 Internal Server Error`: Server error.
+
+### Notes
+- Ensure that the input values are valid float numbers.
+- Check the response code and handle errors accordingly.
+
+Feel free to tailor the documentation to fit your specific documentation style or requirements.
