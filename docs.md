@@ -315,4 +315,3 @@ Example:
 - Ensure that the input values are valid float numbers.
 - Check the response code and handle errors accordingly.
 
-Feel free to tailor the documentation to fit your specific documentation style or requirements.
