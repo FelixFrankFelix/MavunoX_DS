@@ -118,7 +118,7 @@ The API returns a JSON object containing the following recommendations:
 
 
 
-```markdown
+
 ## API Endpoint: `/api/recommendations/temperature`
 
 ### Description
@@ -168,7 +168,7 @@ Farmers are encouraged to follow the provided recommendations to optimize crop y
 
 
 
-```markdown
+
 ## API Endpoint: `/api/recommendations/humidity`
 
 ### Description
@@ -214,4 +214,4 @@ Send a POST request to the `/api/recommendations/humidity` endpoint with the req
 ### Important Note
 
 Farmers are encouraged to follow the provided recommendations to optimize crop yield. The information is advisory and aims to assist farmers in making informed decisions about crop management practices.
-```
+
