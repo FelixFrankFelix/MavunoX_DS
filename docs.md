@@ -5,111 +5,167 @@
 
 The MavunoX Farming Recommendations API provides recommendations for crop cultivation based on soil and environmental parameters.
 
-## Endpoint
 
-- **URL:** `https://mavunox.onrender.com/api/get_results/`
-- **Method:** POST
+## API Endpoint: `/api/get_first_results/` (POST)
 
-## Request Body
+### Description
+This endpoint provides recommendations based on color values (R, G, B), label, and country for optimizing rice yield. It takes input values and returns expected values for pH, water availability, and additional information related to rice cultivation.
 
-### Parameters
+### Endpoint URL
+```plaintext
+https://mavunox.onrender.com/api/get_first_results/
+```
 
-- `R` (integer): Red component of soil color (0-255).
-- `G` (integer): Green component of soil color (0-255).
-- `B` (integer): Blue component of soil color (0-255).
-- `temperature` (float): Temperature in degrees Celsius.
-- `humidity` (float): Relative humidity in percentage.
-- `label` (string): Crop label (e.g., "muskmelon").
-- `country` (string): Country name (e.g., "South Africa").
+### Method
+`POST`
 
-### Example
+### Input
+The input should be a JSON object with the following parameters:
 
+- `R` (int): Red color value.
+- `G` (int): Green color value.
+- `B` (int): Blue color value.
+- `label` (string): The label or type of crop (e.g., "rice").
+- `country` (string): The country where the crop is cultivated.
+
+Example:
 ```json
 {
-  "R": 200,
-  "G": 180,
-  "B": 160,
-  "temperature": 27,
-  "humidity": 46,
-  "label": "muskmelon",
-  "country": "South Africa"
+  "R": 255,
+  "G": 128,
+  "B": 64,
+  "label": "rice",
+  "country": "Nigeria"
 }
 ```
 
-## Response
+### Output
+The output is a JSON object providing expected values for pH, water availability, and additional information related to cultivation.
 
-The API returns a JSON object containing the following recommendations:
-
-- `temperature` (float): Current temperature.
-- `humidity` (float): Current humidity.
-- `ph` (float): Soil pH value.
-- `water_availability` (float): Water availability in millimeters.
-- `planting_season` (string): Recommended planting season.
-- `label` (string): Crop label.
-- `Country` (string): Country name.
-- `harvest_season` (string): Recommended harvest season.
-- `exp_temperature` (object): Expected temperature range and optimum.
-- `exp_humidity` (object): Expected humidity range and optimum.
-- `exp_ph` (object): Expected pH range and optimum.
-- `exp_water_availability` (object): Expected water availability range and optimum.
-- `duration_factor` (float): Duration factor.
-- `temperature_rec` (object): Temperature recommendation details.
-- `humidity_rec` (object): Humidity recommendation details.
-- `ph_rec` (object): pH recommendation details.
-- `water_availability_rec` (object): Water availability recommendation details.
-- `status` (boolean): Indicate if factors is within range, 0(Not in optimal range), 1(within optimal range).
-- `scale` (object): Degree of Optimality (Closeness to optimal value in percent).
-### Example
-
+Example:
 ```json
 {
-  "temperature": 27.0,
-  "humidity": 46.0,
-  "ph": 7.5096330642700195,
-  "water_availability": 94.2563817980022,
-  "planting_season": "summer",
-  "label": "muskmelon",
-  "Country": "South Africa",
-  "harvest_season": "rainy",
-  "exp_temperature": {
-    "min": 27.959327675,
-    "max": 29.370037680000003,
-    "opt": 28.663065755999995
-  },
-  "exp_humidity": {
-    "min": 90.96236271000001,
-    "max": 93.79355208,
-    "opt": 92.34280196090002
-  },
+  "ph": 6.880090236663818,
+  "water_availability": 135.48224195338514,
+  "label": "rice",
+  "Country": "Nigeria",
+  "harvest_season": "summer",
   "exp_ph": {
-    "min": 6.155965203,
-    "max": 6.55022227575,
-    "opt": 6.358805451789998
+    "min": 5.580074332000001,
+    "max": 7.28623774985,
+    "opt": 6.425470922139999
   },
   "exp_water_availability": {
-    "min": 22.0679763825,
-    "max": 26.86160111,
-    "opt": 24.689952066
+    "min": 195.01710482,
+    "max": 276.851351895,
+    "opt": 236.18111359399998
   },
-  "duration_factor": 1.0,
-  "temperature_rec": {
-    "status": 0,
-    "scale": 89.52685871517878
-  },
-  "humidity_rec": {
-    "status": 0,
-    "scale": 3.9895851202461
-  },
+  "duration": 140,
   "ph_rec": {
-    "status": 0,
-    "scale": 45.17426967622115
+    "status": 1,
+    "scale": 88.33734516996184
   },
   "water_availability_rec": {
     "status": 0,
-    "scale": 29.8235440264526
+    "scale": 7.92565129376272
   }
 }
 ```
+
+### Response Codes
+- `200 OK`: Successful request and recommendation provided.
+- `400 Bad Request`: Invalid input parameters.
+- `500 Internal Server Error`: Server error.
+
+### Output Details
+- `ph`: Current pH value.
+- `water_availability`: Current water availability value.
+- `exp_ph`: Expected pH range with minimum (`min`), maximum (`max`), and optimal (`opt`) values.
+- `exp_water_availability`: Expected water availability range with minimum (`min`), maximum (`max`), and optimal (`opt`) values.
+- `duration`: Expected duration of cultivation.
+- `ph_rec`: pH recommendation with `status` indicating the recommendation status (1 for success) and `scale` providing a scale value.
+- `water_availability_rec`: Water availability recommendation with `status` indicating the recommendation status (1 for success) and `scale` providing a scale value.
+
+### Notes
+- Ensure that the input values are within the expected data types.
+- Check the response code and handle errors accordingly.
+
+
+
+## API Endpoint: `/api/get_second_results/` (POST)
+
+### Description
+This endpoint provides recommendations based on temperature and humidity values for optimizing rice yield. It takes input values for temperature, humidity, and the crop label and returns expected and recommended values.
+
+### Endpoint URL
+```plaintext
+https://mavunox.onrender.com/api/get_second_results/
+```
+
+### Method
+`POST`
+
+### Input
+The input should be a JSON object with the following parameters:
+
+- `temperature` (float): Current temperature value.
+- `humidity` (float): Current humidity level.
+- `label` (string): The label or type of crop (e.g., "rice").
+
+Example:
+```json
+{
+  "temperature": 20,
+  "humidity": 84,
+  "label": "rice"
+}
+```
+
+### Output
+The output is a JSON object providing expected and recommended values for temperature and humidity.
+
+Example:
+```json
+{
+  "temperature": 20.0,
+  "humidity": 84.0,
+  "exp_temperature": {
+    "min": 21.9270636125,
+    "max": 25.51370224,
+    "opt": 23.6893322105
+  },
+  "exp_humidity": {
+    "min": 80.9520935175,
+    "max": 83.47025390249999,
+    "opt": 82.27282153889999
+  },
+  "temperature_rec": {
+    "status": 0,
+    "scale": 58.01625904424251
+  },
+  "humidity_rec": {
+    "status": 0,
+    "scale": 99.5535278480284
+  }
+}
+```
+
+### Response Codes
+- `200 OK`: Successful request and recommendation provided.
+- `400 Bad Request`: Invalid input parameters.
+- `500 Internal Server Error`: Server error.
+
+### Output Details
+- `exp_temperature`: Expected temperature range with minimum (`min`), maximum (`max`), and optimal (`opt`) values.
+- `exp_humidity`: Expected humidity range with minimum (`min`), maximum (`max`), and optimal (`opt`) values.
+- `temperature_rec`: Temperature recommendation with `status` indicating the recommendation status (1 for success) and `scale` providing a scale value.
+- `humidity_rec`: Humidity recommendation with `status` indicating the recommendation status (1 for success) and `scale` providing a scale value.
+
+### Notes
+- Ensure that the input values are valid float numbers.
+- Check the response code and handle errors accordingly.
+
+Feel free to customize the documentation based on your specific API documentation format or requirements.
 
 ---
 
