@@ -107,8 +107,6 @@ def get_SoilProfile(R,G,B):
 
 def get_HarvestSeason(temperature,humidity,soil_pH,water_availability,label,country):
     new_entry = {
-        'temperature': temperature,
-        'humidity': humidity,
         'ph': soil_pH,
         'water_availability': water_availability,
         'label': label,
@@ -164,39 +162,25 @@ def calc_scale(actual_number, input_number, k):
 #print(crop_info)
 
 #print(soil_pH,water_avail,harvest_season)
-def get_Results(entry):
+def get_First_Results(entry):
     global soil_pH, water_avail
     soil_pH, water_avail = get_SoilProfile(entry.R, entry.G, entry.B)
-    harvest_season = get_HarvestSeason(entry.temperature, entry.humidity, soil_pH, water_avail, entry.label, entry.country)
+    harvest_season = get_HarvestSeason(soil_pH, water_avail, entry.label, entry.country)
 
-    temperature_status = calc_status(entry.temperature, [crop_info[entry.label]['temperature']['min'], crop_info[entry.label]['temperature']['max']])
-    humidity_status = calc_status(entry.humidity, [crop_info[entry.label]['humidity']['min'], crop_info[entry.label]['humidity']['max']])
     ph_status = calc_status(soil_pH, [crop_info[entry.label]['ph']['min'], crop_info[entry.label]['ph']['max']])
     water_availability_status = calc_status(water_avail, [crop_info[entry.label]['water availability']['min'], crop_info[entry.label]['water availability']['max']])
 
-    temperature_scale = calc_scale(entry.temperature, crop_info[entry.label]['temperature']['opt'], 0.04)
-    humidity_scale = calc_scale(entry.humidity, crop_info[entry.label]['humidity']['opt'], 0.0015)
+    
     ph_scale = calc_scale(soil_pH, crop_info[entry.label]['ph']['opt'], 0.6)
     water_availability_scale = calc_scale(water_avail, crop_info[entry.label]['water availability']['opt'], 0.00025)
 
     results = {
-        'temperature': float(entry.temperature),
-        'humidity': float(entry.humidity),
         'ph': float(soil_pH),
         'water_availability': float(water_avail),
         'label': entry.label,
         'Country': entry.country,
         'harvest_season': harvest_season,
-        'exp_temperature': {
-            'min': float(crop_info[entry.label]['temperature']['min']),
-            'max': float(crop_info[entry.label]['temperature']['max']),
-            'opt': float(crop_info[entry.label]['temperature']['opt']),
-        },
-        'exp_humidity': {
-            'min': float(crop_info[entry.label]['humidity']['min']),
-            'max': float(crop_info[entry.label]['humidity']['max']),
-            'opt': float(crop_info[entry.label]['humidity']['opt']),
-        },
+        
         'exp_ph': {
             'min': float(crop_info[entry.label]['ph']['min']),
             'max': float(crop_info[entry.label]['ph']['max']),
@@ -208,14 +192,7 @@ def get_Results(entry):
             'opt': float(crop_info[entry.label]['water availability']['opt']),
         },
         'duration_factor': float(duration_factor[entry.label]),
-        'temperature_rec': {
-            'status':int(temperature_status),
-            'scale': float(temperature_scale)
-        },
-        'humidity_rec': {
-            'status': int(humidity_status),
-            'scale': float(humidity_scale)
-        },
+        
         'ph_rec': {
             'status': int(ph_status),
             'scale': float(ph_scale)
@@ -228,5 +205,34 @@ def get_Results(entry):
 
     return results
 
+def get_Second_Results(entry):
+    temperature_status = calc_status(entry.temperature, [crop_info[entry.label]['temperature']['min'], crop_info[entry.label]['temperature']['max']])
+    humidity_status = calc_status(entry.humidity, [crop_info[entry.label]['humidity']['min'], crop_info[entry.label]['humidity']['max']])
+    temperature_scale = calc_scale(entry.temperature, crop_info[entry.label]['temperature']['opt'], 0.04)
+    humidity_scale = calc_scale(entry.humidity, crop_info[entry.label]['humidity']['opt'], 0.0015)
+    
+    results = {
+        'temperature': float(entry.temperature),
+        'humidity': float(entry.humidity),
+        'exp_temperature': {
+            'min': float(crop_info[entry.label]['temperature']['min']),
+            'max': float(crop_info[entry.label]['temperature']['max']),
+            'opt': float(crop_info[entry.label]['temperature']['opt']),
+        },
+        'exp_humidity': {
+            'min': float(crop_info[entry.label]['humidity']['min']),
+            'max': float(crop_info[entry.label]['humidity']['max']),
+            'opt': float(crop_info[entry.label]['humidity']['opt']),
+        },
+        'temperature_rec': {
+            'status':int(temperature_status),
+            'scale': float(temperature_scale)
+        },
+        'humidity_rec': {
+            'status': int(humidity_status),
+            'scale': float(humidity_scale)
+        },
+    }
+    return results
 
 #print(get_Results(entry))
