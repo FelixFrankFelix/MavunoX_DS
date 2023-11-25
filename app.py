@@ -14,6 +14,7 @@ class FirstData(BaseModel):
 class SecondData(BaseModel):
     temperature: float
     humidity: float
+    label: str
 
 class FarmData(BaseModel):
     min : float
@@ -48,7 +49,7 @@ def rec_gen(data: FarmData):
 
 
 @app.post("/api/get_first_results/")
-def process_crop_data(data: FirstData):
+def process_crop_data1(data: FirstData):
     
     results = gn.get_First_Results(data)
     # Perform processing or any logic with the data
@@ -56,7 +57,7 @@ def process_crop_data(data: FirstData):
     return results
 
 @app.post("/api/get_second_results/")
-def process_crop_data(data: SecondData):
+def process_crop_data2(data: SecondData):
     
     results = gn.get_Second_Results(data)
     # Perform processing or any logic with the data

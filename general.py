@@ -34,20 +34,20 @@ with open(crop_info_path, 'rb') as crop_info_file:
     crop_info = pickle.load(crop_info_file)
 
 
-duration_factor = {
-    'blackgram': 1,
-    'chickpea': 1,
-    'cotton': 3,
-    'jute': 2,
-    'kidneybeans': 1,
-    'lentil': 2,
-    'maize': 1,
-    'mothbeans': 1,
-    'mungbean': 2,
-    'muskmelon': 1,
-    'pigeonpeas': 3,
-    'rice': 3,
-    'watermelon': 1
+duration = {
+    'blackgram': 75,
+    'chickpea': 105,
+    'cotton': 165,
+    'jute': 135,
+    'kidneybeans': 115,
+    'lentil': 115,
+    'maize': 80,
+    'mothbeans': 75,
+    'mungbean': 75,
+    'muskmelon': 85,
+    'pigeonpeas': 120,
+    'rice': 140,
+    'watermelon': 80
 }
 #print(crop_info['rice']['ph']['max'])
 
@@ -105,7 +105,7 @@ def get_SoilProfile(R,G,B):
     return soil_pH,water_availabiliy
 
 
-def get_HarvestSeason(temperature,humidity,soil_pH,water_availability,label,country):
+def get_HarvestSeason(soil_pH,water_availability,label,country):
     new_entry = {
         'ph': soil_pH,
         'water_availability': water_availability,
@@ -117,7 +117,6 @@ def get_HarvestSeason(temperature,humidity,soil_pH,water_availability,label,coun
     new_data = pd.DataFrame.from_dict({0: new_entry}, orient='index')
     # Apply the same one-hot encoding to 'Country' and 'label'
     new_data_encoded = pd.get_dummies(new_data, columns=['Country', 'label'], dtype=int)
-    new_data_encoded['humidity_to_temperature_ratio'] = new_data_encoded['humidity'] / new_data_encoded['temperature']
     new_data_encoded['ph_to_water_availability_ratio'] = new_data_encoded['ph'] / new_data_encoded['water_availability']
 
     # Ensure the columns match the ones used during training
@@ -191,7 +190,7 @@ def get_First_Results(entry):
             'max': float(crop_info[entry.label]['water availability']['max']),
             'opt': float(crop_info[entry.label]['water availability']['opt']),
         },
-        'duration_factor': float(duration_factor[entry.label]),
+        'duration': float(duration[entry.label]),
         
         'ph_rec': {
             'status': int(ph_status),
