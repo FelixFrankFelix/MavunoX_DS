@@ -2,7 +2,17 @@ import general as gn
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import recommendation_engine as rec
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
 
 class FirstData(BaseModel):
     R: int
