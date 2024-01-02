@@ -1,4 +1,4 @@
-# MavunoX_DS
+# MavunoX Data Science and ML
 ## Description
 
 Welcome to the Data Science component of the MavunoX project! This machine learning system is dedicated to predicting the harvest season by analyzing a myriad of environmental factors. MavunoX is a comprehensive initiative focused on leveraging technology for sustainable agriculture, and this Data Science module plays a crucial role in optimizing crop yield predictions.
