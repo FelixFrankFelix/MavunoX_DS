@@ -76,7 +76,7 @@ The Soil pH Predictor model aims to predict soil pH based on soil color informat
 
 The dataset used in this model is derived from the aforementioned research paper. It consists of a mapping of RGB values to corresponding soil pH levels.
 
-![Soil pH Data Image]("Data\Soil_Data.png")
+![Soil pH Data Image](Data\Soil_Data.png)
 
 ### Preprocessing
 
@@ -106,13 +106,6 @@ For a more comprehensive analysis and visualizations, please refer to the associ
 
 The Water Availability Model is designed to estimate water availability based on the grayscale representation of soil color. The model assumes a correlation between soil color and water content, employing a straightforward approach to interpret grayscale values.
 
-The grayscale value (gray_scale) is calculated using the formula:
-
-\[ \text{gray\_scale} = 1 - \left(\frac{(R \times 0.299) + (G \times 0.582) + (B \times 0.114)}{255}\right) \]
-
-The water availability is then determined through a linear interpolation formula:
-
-\[ \text{water\_availability} = 25 + \frac{(\text{gray\_scale} - 0.12) \times (250 - 25)}{0.65 - 0.12} \]
 
 It's important to note that this is a simple approach, and ongoing research is being conducted to enhance and refine the model.
 
@@ -171,7 +164,7 @@ This project part utilizes FastAPI for building the API endpoints and Docker for
 
 ## API Documentation
 
-The API documentation is already available and accessible, Check out the [API Documentation]("docs.md"). To explore the available endpoints, parameters, and responses, simply visit [https://mavunox.onrender.com](https://mavunox.onrender.com).
+The API documentation is already available and accessible, Check out the [API Documentation](docs.md). To explore the available endpoints, parameters, and responses, simply visit [https://mavunox.onrender.com](https://mavunox.onrender.com).
 
 The documentation includes details on:
 
