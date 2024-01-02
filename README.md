@@ -76,7 +76,7 @@ The Soil pH Predictor model aims to predict soil pH based on soil color informat
 
 The dataset used in this model is derived from the aforementioned research paper. It consists of a mapping of RGB values to corresponding soil pH levels.
 
-![Soil pH Data Image](Data\Soil_Data.png)
+![Soil pH Data Image](Data/Soil_Data.png)
 
 ### Preprocessing
 
